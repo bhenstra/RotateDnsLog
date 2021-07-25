@@ -18,6 +18,6 @@ Batch file to rotate Window DNS logs.
             Comment from user Joey located at:
             http://stackoverflow.com/a/10945887/1810071
 
-This a complete rewrite of the original batch file (to suit my needs, eg compression of rotated logs). 
+This is a rewrite of the original batch file (to suit my needs, eg compression of rotated logs). 
 
 I am hoping this is helpful. Usage is at the user's own personal risk. 
