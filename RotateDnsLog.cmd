@@ -44,8 +44,8 @@
 ::: Binaries
     ::: 7-zip
         ::: 7z.exe is required to compress the log file after it has been rotated.
-	        set exec7z=7z.exe
-			set path7z=%ProgramFiles%\7-zip
+                set exec7z=7z.exe
+                set path7z=%ProgramFiles%\7-zip
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 			
 			
@@ -60,13 +60,13 @@
 
      ::: Extract drive letter, path, filename and extention of the log file
 	::: Note: the new variables will be 'log_drive', 'log_path', 'log_name' and 'log_ext'
-	     set inlogfile=%regvalue%
-         FOR %%i IN ("%inlogfile%") DO (
-         set log_drive=%%~di
-         set log_path=%%~pi
-         set log_name=%%~ni
-         set log_ext=%%~xi
-         )
+	    set inlogfile=%regvalue%
+            FOR %%i IN ("%inlogfile%") DO (
+            set log_drive=%%~di
+            set log_path=%%~pi
+            set log_name=%%~ni
+            set log_ext=%%~xi
+            )
 
 ::: Set the variable YYYYMMDD to today's date in YYYYMMDD format
     ::: YYYY = 4-digit year, MM is month (1-12), and DD is day (1-31)
@@ -93,19 +93,19 @@
 		   ::: ::::: move /Y "%log_drive%%log_path%%in_original_log%" "%log_drive%%log_path%%out_rotated_log%"
            
 		   ::: Check if we can find the log file
-		   if not exist "%log_drive%%log_path%%in_original_log%" ( echo Sorry, "%in_original_log%" was not found at "%log_drive%%log_path%" && goto :END )
+		       if not exist "%log_drive%%log_path%%in_original_log%" ( echo Sorry, "%in_original_log%" was not found at "%log_drive%%log_path%" && goto :END )
 		   
 		       :::Check if the log file has been rotated already...
-			   if exist "%log_drive%%log_path%%out_rotated_log%" ( echo It looks like the log file has been rotated already - skipping - remove or rename "%out_rotated_log%" manually if you realy want to rotate the DNS log file now. && echo The location of the rotated log file is "%log_drive%%log_path%". && echo. && goto :END )
+			  if exist "%log_drive%%log_path%%out_rotated_log%" ( echo It looks like the log file has been rotated already - skipping - remove or rename "%out_rotated_log%" manually if you realy want to rotate the DNS log file now. && echo The location of the rotated log file is "%log_drive%%log_path%". && echo. && goto :END )
 		   
 		   ::: Stop the DNS server service
 		       echo The DNS server service will be stopped now - it will be started after log rotation... && echo.
-			   NET STOP "DNS Server"
+			    NET STOP "DNS Server"
 		   
 		   ::: Rename the log file (use 'move' or 'rename')
 		       rem move /Y "%log_drive%%log_path%%in_original_log%" "%log_drive%%log_path%%out_rotated_log%"
-			   rename "%log_drive%%log_path%%in_original_log%" "%out_rotated_log%"
-			    if exist "%log_drive%%log_path%%out_rotated_log%" ( echo The DNS log file has been rotated: "%log_drive%%log_path%%out_rotated_log%" && echo. ) else ( echo Sorry, the DNS log file has not been rotated... && echo. ) 
+			rename "%log_drive%%log_path%%in_original_log%" "%out_rotated_log%"
+			 if exist "%log_drive%%log_path%%out_rotated_log%" ( echo The DNS log file has been rotated: "%log_drive%%log_path%%out_rotated_log%" && echo. ) else ( echo Sorry, the DNS log file has not been rotated... && echo. ) 
 			   
 		   ::: Start the DNS server service
 		       
@@ -126,8 +126,8 @@
 			  echo Compressing... && echo. && echo 7-Zip outpunt below this line --- && echo.
 			  "%path7z%\%exec7z%" a -sdel -mx9 -y "%log_drive%%log_path%%out_rotated_7z%" "%log_drive%%log_path%%out_rotated_log%"
 			  echo. && echo --- 7-Zip output above this line && echo.
-			     if exist "%log_drive%%log_path%%out_rotated_7z%" echo The rotated log file "%log_drive%%log_path%%out_rotated_log%" has been archived and replaced by "%log_drive%%log_path%%out_rotated_7z%"
-		   )
+			  if exist "%log_drive%%log_path%%out_rotated_7z%" echo The rotated log file "%log_drive%%log_path%%out_rotated_log%" has been archived and replaced by "%log_drive%%log_path%%out_rotated_7z%"
+		      )
            :7zEnd
 
 ::: Purge log files
