@@ -26,24 +26,24 @@
 
 
 ::: Variables    :: ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-	::: You can adjust the variables below. 
-	::: 7-Zip from https://www.7-zip.org/ is used to cmpress the rotated log files (but it's not a requirement to run this batch file).
-	::: It's a good idea to purge rotated logs after some time. 
+    ::: You can adjust the variables below. 
+    ::: 7-Zip from https://www.7-zip.org/ is used to cmpress the rotated log files (but it's not a requirement to run this batch file).
+    ::: It's a good idea to purge rotated logs after some time. 
 
 ::: Compress rotated DNS log file? Options: 'yes' or 'no'
     ::: Note: this requires 7-Zip: 7z.exe
     set compress=yes
 
 ::: Purge rotated log fils? Options: 'yes' or 'no'
-	SET purgelogs=yes
+    SET purgelogs=yes
 ::: Purge rotated log files after nn days, eg 90
-	set purgelogsdays=90
+    set purgelogsdays=90
 ::: Purge extension
     set purgeext=7z
 
 ::: Binaries
     ::: 7-zip
-	    ::: 7z.exe is required to compress the log file after it has been rotated.
+        ::: 7z.exe is required to compress the log file after it has been rotated.
 	        set exec7z=7z.exe
 			set path7z=%ProgramFiles%\7-zip
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -59,7 +59,7 @@
 		     if "%regvalue%"=="" echo DNS log file not found. Sorry. && goto :END
 
      ::: Extract drive letter, path, filename and extention of the log file
-	 ::: Note: the new variables will be 'log_drive', 'log_path', 'log_name' and 'log_ext'
+	::: Note: the new variables will be 'log_drive', 'log_path', 'log_name' and 'log_ext'
 	     set inlogfile=%regvalue%
          FOR %%i IN ("%inlogfile%") DO (
          set log_drive=%%~di
@@ -80,7 +80,7 @@
     
 ::: Rename the log file
     ::: Note: set the name for the rotated log file to have "_YYYYMMDD.log" at the end of the file name.  Need to use delayed expansion.
-    set in_original_log=%log_name%%log_ext%
+     set in_original_log=%log_name%%log_ext%
 	set out_rotated_log=%log_name%_%YYYYMMDD%%log_ext%
 	set out_rotated_7z=%log_name%_%YYYYMMDD%.7z
  
