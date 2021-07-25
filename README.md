@@ -1,5 +1,5 @@
 # RotateDnsLog
-Rotate Windows Server DNS Log
+Rotate Windows Server DNS Log: RotateDnsLog.cmd (initial version: 1.1 - RotateDnsLog-2021-07-25.7z)
 
 Batch file to rotate Window DNS logs. 
 
